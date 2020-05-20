@@ -1,11 +1,9 @@
-package com.main.repository;
-
-import java.util.Optional;
+package com.hajj.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.main.domain.Candidat;
+import com.hajj.domain.Candidat;
 
 @Repository
 public interface CandidatRepository extends JpaRepository<Candidat, Long> {

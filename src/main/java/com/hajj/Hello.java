@@ -1,4 +1,4 @@
-package com.main;
+package com.hajj;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.main.domain.Candidat;
-import com.main.repository.CandidatRepository;
+import com.hajj.domain.Candidat;
+import com.hajj.repository.CandidatRepository;
 
 @RestController
 @RequestMapping("/api")
