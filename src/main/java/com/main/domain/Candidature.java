@@ -1,9 +1,14 @@
 package com.main.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity 
@@ -13,18 +18,21 @@ public class Candidature {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idCandidature")
 	private int idCandidature ;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idCandidat")
+	private Candidat candidat ; 
 	
-	private Integer idCandidat ; 
+	@ManyToOne
+	@JoinColumn(name="idTirage")
+	private Tirage tirage ; 
 	
-	
-	private int idTirage ; 
-	
-	
+	@Column(name="Type")
 	private String type ; 
 	
-	
+	@Column(name="Annee")
 	private int annee ;
 
 
@@ -38,23 +46,36 @@ public class Candidature {
 	}
 
 
-	public int getIdCandidat() {
-		return idCandidat;
+	public Candidat getCandidat() {
+		return candidat;
 	}
 
 
-	public void setIdCandidat(int idCandidat) {
-		this.idCandidat = idCandidat;
+	public void setIdCandidat(Candidat candidat) {
+		this.candidat = candidat;
 	}
 
 
-	public int getIdTirage() {
-		return idTirage;
+	
+
+
+	public Tirage getTirage() {
+		return tirage;
 	}
 
 
-	public void setIdTirage(int idTirage) {
-		this.idTirage = idTirage;
+	public void setTirage(Tirage tirage) {
+		this.tirage = tirage;
+	}
+
+
+	public void setIdCandidature(int idCandidature) {
+		this.idCandidature = idCandidature;
+	}
+
+
+	public void setCandidat(Candidat candidat) {
+		this.candidat = candidat;
 	}
 
 
@@ -78,11 +99,12 @@ public class Candidature {
 	}
 
 
-	public Candidature(int idCandidature, int idCandidat, int idTirage, String type, int annee) {
+
+	public Candidature(int idCandidature, Candidat candidat, Tirage tirage, String type, int annee) {
 		super();
 		this.idCandidature = idCandidature;
-		this.idCandidat = idCandidat;
-		this.idTirage = idTirage;
+		this.candidat = candidat;
+		this.tirage = tirage;
 		this.type = type;
 		this.annee = annee;
 	}

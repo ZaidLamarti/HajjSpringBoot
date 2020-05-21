@@ -1,9 +1,13 @@
 package com.main.domain;
 
+import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity 
@@ -12,27 +16,31 @@ public class Utilisateur {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idUtilisateur")
 	private Integer idUtilisateur ;
 	
-	
+	@Column(name="Nom")
 	private String nom ;
 	
-	
+	@Column(name="Prenom")
 	private String prenom ; 
 	
-	
+	@Column(name="Login")
 	private String login ;
 	
-	
+	@Column(name="Password")
 	private String password ;
 	
-	
+	@Column(name="Statut")
 	private String statut ;
 	
-	
+	@Column(name="EtatInscription")
 	private boolean etatInscription ;
 	
 	
+	@OneToMany(mappedBy= "utilisateur")
+	@Column(name="idTirage")
+	private Set<Tirage> tirages ; 
 	
 
 
@@ -106,8 +114,8 @@ public class Utilisateur {
 	}
 
 
-	public Utilisateur(int idUtilisateur, String nom, String prenom, String login, String password, String statut,
-			boolean etatInscription) {
+	public Utilisateur(Integer idUtilisateur, String nom, String prenom, String login, String password, String statut,
+			boolean etatInscription, Set<Tirage> tirages) {
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.nom = nom;
@@ -116,12 +124,16 @@ public class Utilisateur {
 		this.password = password;
 		this.statut = statut;
 		this.etatInscription = etatInscription;
+		this.tirages = tirages;
 	}
 
 
 	public Utilisateur() {
 		super();
 	}
+
+
+	
 	
 	
 	

@@ -2,11 +2,14 @@ package com.main.domain;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,33 +19,34 @@ public class Candidat {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idCandidat")
 	private int idCandidat ;
 	
-	
-	private int idCandidature ;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "candidat", fetch = FetchType.LAZY)
+	private Candidature candidature ;
 	
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String code ;
 	
-	@Column(length = 40)
+	@Column(length = 40,name="Nom")
 	private String nom ; 
 	
-	@Column(length = 40)
+	@Column(length = 40,name="Prenom")
 	private String prenom ; 
 	
 	@Column(length = 40)
 	private String num ; 
 	
-	@Column(length = 40)
+	@Column(length = 40,name="Cin")
 	private String cin ;
 	
-	@Column(length = 40)
+	@Column(length = 40,name="DateDeNaissance")
 	private Date dateDeNaissance ;
 	
-	@Column(length = 20)
+	@Column(length = 20,name="Sexe")
 	private String sexe ;
 	
-	@Column(length = 40)
+	@Column(length = 40,name="Mail")
 	private String mail ;
 
 	
@@ -64,12 +68,12 @@ public class Candidat {
 		this.idCandidat = idCandidat;
 	}
 
-	public int getIdCandidature() {
-		return idCandidature;
+	public Candidature getCandidature() {
+		return candidature;
 	}
 
-	public void setIdCandidature(int idCandidature) {
-		this.idCandidature = idCandidature;
+	public void setIdCandidature(Candidature candidature) {
+		this.candidature = candidature;
 	}
 
 	public String getCode() {
@@ -136,11 +140,11 @@ public class Candidat {
 		this.mail = mail;
 	}
 
-	public Candidat(int idCandidat, int idCandidature, String code, String nom, String prenom, String num, String cin,
+	public Candidat(int idCandidat, Candidature candidature, String code, String nom, String prenom, String num, String cin,
 			Date dateDeNaissance, String sexe, String mail) {
 		super();
 		this.idCandidat = idCandidat;
-		this.idCandidature = idCandidature;
+		this.candidature = candidature;
 		this.code = code;
 		this.nom = nom;
 		this.prenom = prenom;

@@ -2,14 +2,15 @@ package com.main.domain;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-
 
 
 @Entity 
@@ -21,16 +22,16 @@ public class Evenement {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idEvenement ;
 	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "evenement", fetch = FetchType.LAZY)
+	private Tirage tirage ; 
 	
-	private int idTirage ; 
-	
-	@Column(length = 30)
+	@Column(length = 30,name="Nom")
 	private String nom ; 
 	
-	@Column(length = 30)
+	@Column(length = 30,name="Heure")
 	private double heure ;
 	
-	@Column(length = 30)
+	@Column(length = 30,name="DateEvenement")
 	private Date dateEvenement ;
 	
 	
@@ -46,13 +47,13 @@ public class Evenement {
 	}
 
 
-	public int getIdTirage() {
-		return idTirage;
+	public Tirage getIdTirage() {
+		return tirage;
 	}
 
 
-	public void setIdTirage(int idTirage) {
-		this.idTirage = idTirage;
+	public void setIdTirage(Tirage tirage) {
+		this.tirage = tirage;
 	}
 
 
@@ -86,10 +87,10 @@ public class Evenement {
 	}
 
 
-	public Evenement(int idEvenement, int idTirage, String nom, double heure, Date dateEvenement) {
+	public Evenement(int idEvenement, Tirage tirage, String nom, double heure, Date dateEvenement) {
 		super();
 		this.idEvenement = idEvenement;
-		this.idTirage = idTirage;
+		this.tirage = tirage;
 		this.nom = nom;
 		this.heure = heure;
 		this.dateEvenement = dateEvenement;

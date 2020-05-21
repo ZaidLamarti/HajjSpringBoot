@@ -1,10 +1,17 @@
 package com.main.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -15,29 +22,37 @@ public class Tirage {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idTirage ; 
+
+	@ManyToOne
+	@JoinColumn(name="idUtilisateur")
+	private Utilisateur utilisateur ;
 	
+	@OneToMany(mappedBy="tirage")
+	@Column(name="Candidatures")
+	private Set<Candidature> candidatures ;
 	
-	private int idUtilisateur ;
+	@OneToMany(mappedBy="tirage")
+	@Column(name="CandidaturesChoisi")
+	private Set<Candidature> idCanditatureChoisi ;
 	
+	@OneToMany(mappedBy="tirage")
+	@Column(name="CandidaturesAttente")
+	private Set<Candidature> idCandidatureAttente ; 
 	
-	private int idCandidature ;
-	
-	
-	private int idCanditatureChoisi ;
-	
-	
-	private int idCandidatureAttente ; 
-	
-	
+	@Column(name="NombreRetenir")
 	private int nbrRetenir ; 
 	
-	
+	@Column(name="NombreAttente")
 	private int nbrAttente ;
 	
-	@Column(length = 50)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idEvenement")
+	private Evenement evenement ;
+	
+	@Column(length = 50,name="Lieu")
 	private String lieu ;
 	
-	@Column(length = 40)
+	@Column(length = 40,name="Etat")
 	private boolean etat ;
 
 
@@ -51,42 +66,56 @@ public class Tirage {
 	}
 
 
-	public int getIdUtilisateur() {
-		return idUtilisateur;
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
 
-	public void setIdUtilisateur(int idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 
-	public int getIdCandidature() {
-		return idCandidature;
+	public Set<Candidature> getCandidatures() {
+		return candidatures;
 	}
 
 
-	public void setIdCandidature(int idCandidature) {
-		this.idCandidature = idCandidature;
+	public void setCandidatures(Set<Candidature> candidatures) {
+		this.candidatures = candidatures;
 	}
 
 
-	public int getIdCanditatureChoisi() {
+	public Evenement getEvenement() {
+		return evenement;
+	}
+
+
+	public void setEvenement(Evenement evenement) {
+		this.evenement = evenement;
+	}
+
+
+	
+
+
+	public Set<Candidature> getIdCanditatureChoisi() {
 		return idCanditatureChoisi;
 	}
 
 
-	public void setIdCanditatureChoisi(int idCanditatureChoisi) {
+	public void setIdCanditatureChoisi(Set<Candidature> idCanditatureChoisi) {
 		this.idCanditatureChoisi = idCanditatureChoisi;
 	}
 
 
-	public int getIdCandidatureAttente() {
+	public Set<Candidature> getIdCandidatureAttente() {
 		return idCandidatureAttente;
 	}
 
 
-	public void setIdCandidatureAttente(int idCandidatureAttente) {
+	public void setIdCandidatureAttente(Set<Candidature> idCandidatureAttente) {
 		this.idCandidatureAttente = idCandidatureAttente;
 	}
 
@@ -130,17 +159,21 @@ public class Tirage {
 		this.etat = etat;
 	}
 
+	
 
-	public Tirage(int idTirage, int idUtilisateur, int idCandidature, int idCanditatureChoisi, int idCandidatureAttente,
-			int nbrRetenir, int nbrAttente, String lieu, boolean etat) {
+
+	public Tirage(Integer idTirage, Utilisateur utilisateur, Set<Candidature> candidatures,
+			Set<Candidature> idCanditatureChoisi, Set<Candidature> idCandidatureAttente, int nbrRetenir, int nbrAttente,
+			Evenement evenement, String lieu, boolean etat) {
 		super();
 		this.idTirage = idTirage;
-		this.idUtilisateur = idUtilisateur;
-		this.idCandidature = idCandidature;
+		this.utilisateur = utilisateur;
+		this.candidatures = candidatures;
 		this.idCanditatureChoisi = idCanditatureChoisi;
 		this.idCandidatureAttente = idCandidatureAttente;
 		this.nbrRetenir = nbrRetenir;
 		this.nbrAttente = nbrAttente;
+		this.evenement = evenement;
 		this.lieu = lieu;
 		this.etat = etat;
 	}
