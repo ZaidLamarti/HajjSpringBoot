@@ -1,6 +1,7 @@
 package com.main.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,7 +42,7 @@ public class Candidat {
 	private String cin ;
 	
 	@Column(length = 40,name="DateDeNaissance")
-	private Date dateDeNaissance ;
+	private LocalDate dateDeNaissance ;
 	
 	@Column(length = 20,name="Sexe")
 	private String sexe ;
@@ -116,12 +117,21 @@ public class Candidat {
 		this.cin = cin;
 	}
 
-	public Date getDateDeNaissance() {
+	
+	public LocalDate getDateDeNaissance() {
 		return dateDeNaissance;
 	}
 
-	public void setDateDeNaissance(Date dateDeNaissance) {
+	public void setDateDeNaissance(LocalDate dateDeNaissance) {
 		this.dateDeNaissance = dateDeNaissance;
+	}
+
+	public void setIdCandidat(int idCandidat) {
+		this.idCandidat = idCandidat;
+	}
+
+	public void setCandidature(Candidature candidature) {
+		this.candidature = candidature;
 	}
 
 	public String getSexe() {
@@ -141,7 +151,7 @@ public class Candidat {
 	}
 
 	public Candidat(int idCandidat, Candidature candidature, String code, String nom, String prenom, String num, String cin,
-			Date dateDeNaissance, String sexe, String mail) {
+			LocalDate localDate, String sexe, String mail) {
 		super();
 		this.idCandidat = idCandidat;
 		this.candidature = candidature;
@@ -150,7 +160,7 @@ public class Candidat {
 		this.prenom = prenom;
 		this.num = num;
 		this.cin = cin;
-		this.dateDeNaissance = dateDeNaissance;
+		this.dateDeNaissance = localDate;
 		this.sexe = sexe;
 		this.mail = mail;
 	}
