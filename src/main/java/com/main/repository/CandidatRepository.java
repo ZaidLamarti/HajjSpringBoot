@@ -15,4 +15,6 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	 * 
 	 * Boolean existsByEmail(String email);
 	 */
+	
+	
 }
