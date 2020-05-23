@@ -7,7 +7,6 @@ import com.main.domain.Utilisateur;
 
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>{
-
 	/*
 	 * Optional<Utilisateur> findByUsername(String username);
 	 * 
