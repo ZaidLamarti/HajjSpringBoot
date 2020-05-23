@@ -76,18 +76,22 @@ public class UtilisateurController {
 	}
 	
 	
-	@RequestMapping
+	@RequestMapping(value = "/Auth/{login}/{pass}")
 	public boolean connect( @PathVariable String login , @PathVariable String pass) {
 		
 		for(Utilisateur u : utilisateurRepository.findAll()) {
 			if(u.getLogin() == login ) {
 				if(u.getPassword() == pass) {
-					return true ;
-				}
-			}
-		}
+												return true ;
+											} 
+												
+										}
+			
+															}
 		return false ;
 	}
 	
 	
+	
 }
+
