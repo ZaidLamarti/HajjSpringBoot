@@ -13,6 +13,8 @@ import com.main.domain.Candidat;
 import com.main.domain.Utilisateur;
 import com.main.repository.UtilisateurRepository;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+
 @RestController
 @RequestMapping(value="/User")
 public class UtilisateurController {
@@ -75,20 +77,20 @@ public class UtilisateurController {
 		return utilisateurRepository.findAll() ;
 	}
 	
-	
+	@Getter
 	@RequestMapping(value = "/Auth/{login}/{pass}")
-	public boolean connect( @PathVariable String login , @PathVariable String pass) {
+	public String connect( @PathVariable String login , @PathVariable String pass) {
 		
 		for(Utilisateur u : utilisateurRepository.findAll()) {
 			if(u.getLogin() == login ) {
 				if(u.getPassword() == pass) {
-												return true ;
+												return "true" ;
 											} 
 												
 										}
 			
-															}
-		return false ;
+							 								}
+		return "false" ;
 	}
 	
 	
