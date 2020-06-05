@@ -25,18 +25,11 @@ public class UtilisateurController {
 	
 	
 	@RequestMapping(value="/check/{login}/{password}")
-	public boolean verify(@PathVariable String login , @PathVariable String password ) {
-		for(Utilisateur u : utilisateurRepository.findAll() ) {
+	public Utilisateur verify(@PathVariable String login , @PathVariable String password ) {
 		
-		if(u.getLogin() == login ) {
-			if(u.getPassword() == password) {
-				return true ;
-			}
-			else return false ; 
-		}
-									}
-		return false;
+		//boolean u = utilisateurRepository.existsByLoginAndPassword(login, password);
 		
+		return utilisateurRepository.findByLoginAndPassword(login, password) ;
 	}
 	
 	
@@ -50,7 +43,8 @@ public class UtilisateurController {
 	
 	@RequestMapping (value = "/Get/all")
 	public List<Utilisateur> getAll(){
-		return utilisateurRepository.findAll() ;
+		List<Utilisateur> utilisateurs = utilisateurRepository.findAll();
+		return utilisateurs ;
 	}
 	
 	
