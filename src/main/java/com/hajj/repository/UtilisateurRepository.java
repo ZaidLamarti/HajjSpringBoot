@@ -7,5 +7,7 @@ import com.hajj.domain.Utilisateur;
 
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>  {
+	
+	Boolean existsByLoginAndPassword(String login,String password);
 
 }
